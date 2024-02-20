@@ -21,6 +21,11 @@ const userSchema = new Schema(
       required: true,
       min: 5,
     },
+    photoUrl: {
+      type: String,
+      default:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__H-FaeADAspQbggprYkIa8oWFi2yQXs5zCjvV3ZGKA&s",
+    },
   },
   {
     timestamps: true,
