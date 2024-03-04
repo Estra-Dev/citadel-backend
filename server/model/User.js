@@ -26,6 +26,10 @@ const userSchema = new Schema(
       default:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__H-FaeADAspQbggprYkIa8oWFi2yQXs5zCjvV3ZGKA&s",
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

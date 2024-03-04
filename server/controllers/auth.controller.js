@@ -42,7 +42,10 @@ export const login = async (req, res, next) => {
         next(errorHandler(400, "Wrong Credentials"));
       } else {
         const { password: pass, ...rest } = userExist._doc;
-        const token = jwt.sign({ userID: userExist._id }, process.env.SECRETE);
+        const token = jwt.sign(
+          { userID: userExist._id, isAdmin: userExist.isAdmin },
+          process.env.SECRETE
+        );
         res.status(201).cookie("access_token", token).json({ token, rest });
       }
     }
@@ -60,7 +63,10 @@ export const google = async (req, res, next) => {
 
     if (userExist) {
       const { password: pass, ...rest } = userExist._doc;
-      const token = jwt.sign({ userID: userExist._id }, process.env.SECRETE);
+      const token = jwt.sign(
+        { userID: userExist._id, isAdmin: userExist.isAdmin },
+        process.env.SECRETE
+      );
       res.status(201).cookie("access_token", token).json({ token, rest });
     } else {
       // generate a paaword for the user
@@ -77,7 +83,10 @@ export const google = async (req, res, next) => {
         photoUrl: googlePhotoUrl,
       });
 
-      const token = jwt.sign({ userID: newUser._id }, process.env.SECRETE);
+      const token = jwt.sign(
+        { userID: newUser._id, isAdmin: newUser.isAdmin },
+        process.env.SECRETE
+      );
       const { password: pass, ...rest } = newUser._doc;
       res.status(201).cookie("access_token", token).json({ token, rest });
 
