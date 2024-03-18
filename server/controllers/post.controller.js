@@ -35,8 +35,8 @@ export const getposts = async (req, res, next) => {
     const sortDirection = req.query.order === "asc" ? 1 : -1;
     const posts = await Post.find({
       ...(req.query.userId && { userId: req.query.userId }),
-      ...(req.query.category && { userId: req.query.category }),
-      ...(req.query.slug && { userId: req.query.slug }),
+      ...(req.query.category && { category: req.query.category }),
+      ...(req.query.slug && { slug: req.query.slug }),
       ...(req.query.postId && { _id: req.query.postId }),
       ...(req.query.searchTerm && {
         $or: [
@@ -89,11 +89,11 @@ export const updatepost = async (req, res, next) => {
     return next(errorHandler(403, "You are not allowed to update this post"));
   }
   try {
-    const slug = req.body.title
-      .split(" ")
-      .join("-")
-      .toLowerCase()
-      .replace(/[^a-zA-Z0-9-]/g, "");
+    // const slug = req.body.title
+    //   .split(" ")
+    //   .join("-")
+    //   .toLowerCase()
+    //   .replace(/[^a-zA-Z0-9-]/g, "");
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.postId,
       {
@@ -102,7 +102,7 @@ export const updatepost = async (req, res, next) => {
           content: req.body.content,
           category: req.body.category,
           image: req.body.image,
-          slug: slug,
+          slug: req.body.slug,
         },
       },
       { new: true }
