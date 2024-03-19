@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import postRouter from "./routes/post.route.js";
+import commentRouter from "./routes/comment.route.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome");
