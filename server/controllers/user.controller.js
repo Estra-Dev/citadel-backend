@@ -1,6 +1,6 @@
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
-import User from "../model/user.js";
+import User from "../model/User.js";
 import jwt from "jsonwebtoken";
 
 export const updateUser = async (req, res, next) => {
